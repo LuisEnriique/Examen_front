@@ -17,7 +17,9 @@
     </style>
 </head>
 <body>
-
+    <!-- 
+        Definicion de Input para buscar coincidencias de texto 
+     --> 
     <input type="text" id="searchInput" placeholder="Buscar">
     <select id="houseFilter" >
         <option value="">Todas las casas</option>
@@ -27,6 +29,9 @@
         <option value="Slytherin">Slytherin</option>
     </select>
 
+     <!-- 
+        Definicion de Tabla para la respuesta de la busqueda
+     --> 
     <table id="charactersTable" class="table table-striped table-dark">
         <thead>
             <tr>
@@ -41,12 +46,15 @@
     </table>
 
     <script>
+        
+        //Funcion fetch para realizar peticion http
         async function fetchData() {
             const response = await fetch('https://hp-api.onrender.com/api/characters');
             const data = await response.json();
             return data;
         }
 
+        //Funcion que construye la tabla de respuesta a la API
         function createTableRow(character) {
             const defaultImage = 'desconocido.png';
             const image = character.image ? character.image : defaultImage;
@@ -61,6 +69,7 @@
             return row;
         }
 
+        //Funcion para filtrar la respuesta API
         function filterCharacters(characters) {
             const searchInput = document.getElementById('searchInput').value.toLowerCase();
             const houseFilter = document.getElementById('houseFilter').value.toLowerCase();
@@ -72,6 +81,7 @@
             return filteredCharacters;
         }
 
+        //Funcion para Mostrar el resultado final
         async function displayCharacters() {
             const characters = await fetchData();
             const filteredCharacters = filterCharacters(characters);

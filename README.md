@@ -1,1 +1,1 @@
-Nota: instalar la dependecian:  npm install -g es6
+Nota: instalar la dependecia:  npm install -g es6
